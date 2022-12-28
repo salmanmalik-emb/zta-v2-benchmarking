@@ -10,34 +10,16 @@
 
 ## Results
 
-### Coturn
-| Parameter | Value                |
-| :-------- |:------------------------- |
-| `Throughput` | 100 |
-| `CPU Usage` | 300 |
-| `Response Time < 400ms` | 90 |
-| `400 ms > Response Time < 1s` | 960 |
-| `Packet Loss` | 960 |
-| `Bad Packet Loss` | 960 |
-| `Score` | 960 |
 
-
-
-![CPU](coturn/cpu.png)
-![Network In (Bytes)](coturn/network-in.png)
-![Network Out (Bytes)](coturn/network-in.png)
-
-### Pion/Turn
-| Parameter | Value                |
-| :-------- |:------------------------- |
-| `Throughput` | 100 |
-| `CPU Usage` | 300 |
-| `Response Time < 400ms` | 90 |
-| `400 ms > Response Time < 1s` | 960 |
-| `Packet Loss` | 960 |
-| `Bad Packet Loss` | 960 |
-| `Score` | 960 |
-
-![CPU](pion/cpu.png)
-![Network In (Bytes)](pion/network-in.png)
-![Network Out (Bytes)](pion/network-in.png)
+| Coturn            |  Pion/Turn
+:-------------------------:|:-------------------------:|:-------------------------:
+| `Throughput` | 100 |  100 |
+| `CPU Usage` | 300 |  100 |
+| `Response Time < 400ms` | 90 |  100 |
+| `400 ms > Response Time < 1s` | 960 |  100 |
+| `Packet Loss` | 960 |  100 |
+| `Bad Packet Loss` | 960 |  100 |
+| `Score` | 960 |  100 |
+| CPU Screenshot | ![](coturn/cpu.png) |  ![](pion/cpu.png) |
+| Network In (Bytes) | ![](coturn/network-in.png) |  ![](pion/network-in.png) |
+| Network Out (Bytes) | ![](coturn/network-out.png) |  ![](pion/network-out.png) |
