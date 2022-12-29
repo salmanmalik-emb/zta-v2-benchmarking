@@ -13,13 +13,13 @@
 
 |  Item | Coturn            |  Pion/Turn |
 | :------------------------- |:------------------------- |:------------------------- |
-| `Throughput` | 100 Mbps |  100 Mbps|
-| `CPU Usage` | 300% |  100% |
-| `Response Time < 400ms` | 90% |  100% |
-| `400 ms > Response Time < 1s` | 960% |  100% |
-| `Packet Loss` | 960% |  100% |
-| `Bad Packet Loss` | 960% |  100% |
-| `Score` | 9 |  10 |
+| `Throughput` | 297.64 Mbps | 297.64 Mbps |
+| `CPU Usage` | 57.7% | 71.3% |
+| `Response Time < 400ms` | 59.39% | 57.586% |
+| `400 ms > Response Time < 1s` | 40.57% | 39.95% |
+| `Packet Loss` | 0.036% | 2.457% |
+| `Bad Packet Loss` | 0% | 0% |
+| `Score` | 9.18 | 8.4 |
 | CPU | ![](coturn/cpu.png) |  ![](pion/cpu.png) |
 | Network In | ![](coturn/network-in.png) |  ![](pion/network-in.png) |
 | Network Out | ![](coturn/network-out.png) |  ![](pion/network-out.png) |
