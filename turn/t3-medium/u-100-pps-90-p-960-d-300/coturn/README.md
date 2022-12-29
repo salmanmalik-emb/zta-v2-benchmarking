@@ -13,16 +13,15 @@
 ### Coturn
 | Parameter | Value                |
 | :-------- |:------------------------- |
-| `Throughput` | 100 Mbps |
-| `CPU Usage` | 300% |
-| `Response Time < 400ms` | 90% |
-| `400 ms > Response Time < 1s` | 960% |
-| `Packet Loss` | 960% |
-| `Bad Packet Loss` | 960% |
-| `Score` | 9 |
+| `Throughput` | 148.82 Mbps |
+| `CPU Usage` | 31.3% |
+| `Response Time < 400ms` | 85.515% |
+| `400 ms > Response Time < 1s` | 14.484% |
+| `Packet Loss` | 0% |
+| `Bad Packet Loss` | 0% |
+| `Score` | 9.4 |
 
 
 
 ![CPU](cpu.png)
 ![Network In (Bytes)](network-in.png)
-![Network Out (Bytes)](network-out.png)
