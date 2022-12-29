@@ -3,7 +3,7 @@
 
 | Parameter | Value                |
 | :-------- |:------------------------- |
-| `concurent connections` | 100 |
+| `concurent connections` | 500 |
 | `duration` | 300s |
 | `packets per second` | 90 |
 | `packet size` | 960 bytes |
