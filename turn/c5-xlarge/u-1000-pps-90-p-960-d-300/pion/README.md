@@ -5,21 +5,21 @@
 | :-------- |:------------------------- |
 | `concurent connections` | 1000 |
 | `duration` | 300s |
-| `packets per second` | 16 |
-| `packet size` | 192 bytes |
+| `packets per second` | 90 |
+| `packet size` | 960 bytes |
 
 ## Results
 
 ### Pion/Turn
 | Parameter | Value                |
 | :-------- |:------------------------- |
-| `Throughput` | 60.8 Mbps |
-| `CPU Usage` | 65.8% |
-| `Response Time < 400ms` | 67.89% |
-| `400 ms > Response Time < 1s` | 31.86% |
-| `Packet Loss` | 0.23% |
-| `Bad Packet Loss` | 0% |
-| `Score` | 9.18 |
+| `Throughput` | 1363.968 Mbps |
+| `CPU Usage` | 80.6% |
+| `Response Time < 400ms` | 5.269% |
+| `400 ms > Response Time < 1s` | 21.02% |
+| `Packet Loss` | 69.13% |
+| `Bad Packet Loss` | 8.21% |
+| `Score` | -21.67 |
 
 ![CPU](cpu.png)
 ![Network In (Bytes)](network-in.png)
