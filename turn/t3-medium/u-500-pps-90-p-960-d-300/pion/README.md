@@ -13,13 +13,13 @@
 ### Pion/Turn
 | Parameter | Value                |
 | :-------- |:------------------------- |
-| `Throughput` | 100 Mbps |
-| `CPU Usage` | 300% |
-| `Response Time < 400ms` | 90% |
-| `400 ms > Response Time < 1s` | 960% |
-| `Packet Loss` | 0% |
+| `Throughput` | 734.55 Mbps |
+| `CPU Usage` | 97.2% |
+| `Response Time < 400ms` | 14.88% |
+| `400 ms > Response Time < 1s` | 41.74% |
+| `Packet Loss` | 42.73% |
 | `Bad Packet Loss` | 0% |
-| `Score` | 9 |
+| `Score` | -5.2 |
 
 ![CPU](cpu.png)
 ![Network In (Bytes)](network-in.png)

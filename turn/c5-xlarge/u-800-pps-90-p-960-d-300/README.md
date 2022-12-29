@@ -3,7 +3,7 @@
 
 | Parameter | Value                |
 | :-------- |:------------------------- |
-| `concurent connections` | 300 |
+| `concurent connections` | 800 |
 | `duration` | 300s |
 | `packets per second` | 90 |
 | `packet size` | 960 bytes |
@@ -13,12 +13,13 @@
 
 |  Item | Coturn            |  Pion/Turn |
 | :------------------------- |:------------------------- |:------------------------- |
-| `Throughput` | 446.47 Mbps | 445.09 Mbps |
-| `CPU Usage` | 78.5% | 88.3% |
-| `Response Time < 400ms` | 77.9% | 31.40% |
-| `400 ms > Response Time < 1s` | 21.84% | 54.37% |
-| `Packet Loss` | 0.2% | 14.22% |
-| `Bad Packet Loss` | 0% | 0% |
-| `Score` | 9.28 | 4.4 |
+| `Throughput` | 1198.76 Mbps | 1160.5 Mbps |
+| `CPU Usage` | 82% | 85.4% |
+| `Response Time < 400ms` | 68.03% | 7.35% |
+| `400 ms > Response Time < 1s` | 31.96% | 35.09% |
+| `Packet Loss` | 0.004% | 55.701% |
+| `Bad Packet Loss` | 0% | 1.52% |
+| `Score` | 9.25 | -10.615 |
 | CPU | ![](coturn/cpu.png) |  ![](pion/cpu.png) |
 | Network In | ![](coturn/network-in.png) |  ![](pion/network-in.png) |
+| Network Out | ![](coturn/network-out.png) |  ![](pion/network-out.png) |

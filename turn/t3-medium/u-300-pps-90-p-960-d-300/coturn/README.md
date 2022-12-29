@@ -3,7 +3,7 @@
 
 | Parameter | Value                |
 | :-------- |:------------------------- |
-| `concurent connections` | 100 |
+| `concurent connections` | 300 |
 | `duration` | 300s |
 | `packets per second` | 90 |
 | `packet size` | 960 bytes |
@@ -13,13 +13,13 @@
 ### Coturn
 | Parameter | Value                |
 | :-------- |:------------------------- |
-| `Throughput` | 100 Mbps |
-| `CPU Usage` | 300% |
-| `Response Time < 400ms` | 90% |
-| `400 ms > Response Time < 1s` | 960% |
-| `Packet Loss` | 960% |
-| `Bad Packet Loss` | 960% |
-| `Score` | 9 |
+| `Throughput` | 446.47 Mbps |
+| `CPU Usage` | 78.5% |
+| `Response Time < 400ms` | 77.9% |
+| `400 ms > Response Time < 1s` | 21.84% |
+| `Packet Loss` | 0.2% |
+| `Bad Packet Loss` | 0% |
+| `Score` | 9.28 |
 
 
 
