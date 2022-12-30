@@ -65,4 +65,9 @@
 </table>
 
 
+## CPU vs Throughput vs Connections
+
+![](Connections-Throughput-CPU.png)
+
+
 
