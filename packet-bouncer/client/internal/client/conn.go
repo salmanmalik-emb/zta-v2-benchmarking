@@ -123,10 +123,10 @@ func (conn *clientConn) sendingThread(c net.Conn, timeBase time.Time, wg sync.Wa
 			delta = now.Sub(timeBase)
 		}
 
-		binary.BigEndian.PutUint64(buf[0:8], uint64(delta.Seconds()))
-		binary.BigEndian.PutUint32(buf[8:12], uint32(delta.Nanoseconds()))
+		//binary.BigEndian.PutUint64(buf[0:8], uint64(delta.Seconds()))
+		binary.BigEndian.PutUint64(buf[0:8], uint64(delta.Nanoseconds()))
 
-		binary.BigEndian.PutUint32(buf[12:16], totalctr)
+		binary.BigEndian.PutUint32(buf[8:12], totalctr)
 
 		fmt.Println(fmt.Sprintf("write s=%d, ns=%d, no=%d", uint64(delta.Seconds()), uint32(delta.Nanoseconds()), totalctr))
 		_, err := c.Write(buf)
@@ -209,14 +209,14 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg sync.
 		if err == nil {
 			//println("Received a packet from ", addr)
 
-			s := binary.BigEndian.Uint64(buf[:8])
-			ns := binary.BigEndian.Uint32(buf[8:12])
-			no := binary.BigEndian.Uint32(buf[12:16])
+			//s := binary.BigEndian.Uint64(buf[:8])
+			ns := binary.BigEndian.Uint64(buf[0:8])
+			no := binary.BigEndian.Uint32(buf[8:12])
 
-			if s == 0 && ns == 0 && no == 0 {
+			if /*s == 0 &&*/ ns == 0 && no == 0 {
 				continue
 			}
-			sinceBase := time.Duration(s)*time.Second + time.Duration(ns)*time.Nanosecond
+			sinceBase := time.Duration(ns) * time.Nanosecond
 			sendTime := timeBase.Add(sinceBase)
 			var rtt4 time.Duration
 			if now.After(sendTime) {
@@ -225,7 +225,7 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg sync.
 				rtt4 = time.Duration(999) * time.Second
 			}
 
-			fmt.Println(fmt.Sprintf("read s=%d, ns=%d, no=%d, rtt=%v, sendTime=%v, now=%v", s, ns, no, rtt4, sendTime, now))
+			fmt.Println(fmt.Sprintf("read ns=%d, no=%d, rtt=%v, sendTime=%v, now=%v", ns, no, rtt4, sendTime, now))
 			jitterBuffer = append(jitterBuffer, Packet{
 				no:   no,
 				rtt4: rtt4,
