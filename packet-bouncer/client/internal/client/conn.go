@@ -213,8 +213,9 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg sync.
 			ns := binary.BigEndian.Uint32(buf[8:12])
 			no := binary.BigEndian.Uint32(buf[12:16])
 
-			fmt.Println(fmt.Sprintf("read s=%d, ns=%d, no=%d", s, ns, no))
-
+			if s == 0 && ns == 0 && no == 0 {
+				continue
+			}
 			sinceBase := time.Duration(s)*time.Second + time.Duration(ns)*time.Nanosecond
 			sendTime := timeBase.Add(sinceBase)
 			var rtt4 time.Duration
@@ -223,6 +224,8 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg sync.
 			} else {
 				rtt4 = time.Duration(999) * time.Second
 			}
+
+			fmt.Println(fmt.Sprintf("read s=%d, ns=%d, no=%d, rtt=%v, sendTime=%v, now=%v", s, ns, no, rtt4, sendTime, now))
 			jitterBuffer = append(jitterBuffer, Packet{
 				no:   no,
 				rtt4: rtt4,
