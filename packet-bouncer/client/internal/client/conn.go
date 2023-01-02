@@ -10,11 +10,12 @@ import (
 )
 
 type ConnConfig struct {
-	Endpoint   string
-	Duration   int
-	PacketSize int
-	Pps        int
-	Protocol   string
+	Endpoint          string
+	Duration          int
+	PacketSize        int
+	Pps               int
+	Protocol          string
+	StopDelayDuration int
 }
 
 type clientConn struct {
@@ -93,14 +94,14 @@ func (conn *clientConn) Start() error {
 	wg := sync.WaitGroup{}
 
 	wg.Add(2)
-	go conn.sendingThread(c, timeBase, wg)
-	go conn.receivingThread(c, timeBase, wg)
+	go conn.sendingThread(c, timeBase, &wg)
+	go conn.receivingThread(c, timeBase, &wg)
 
 	wg.Wait()
 	return nil
 }
 
-func (conn *clientConn) sendingThread(c net.Conn, timeBase time.Time, wg sync.WaitGroup) {
+func (conn *clientConn) sendingThread(c net.Conn, timeBase time.Time, wg *sync.WaitGroup) {
 	time.Sleep(500 * time.Millisecond) // to allow receiver to warm up
 	start := time.Now()
 	step := time.Second / time.Duration(conn.config.Pps)
@@ -128,7 +129,7 @@ func (conn *clientConn) sendingThread(c net.Conn, timeBase time.Time, wg sync.Wa
 
 		binary.BigEndian.PutUint32(buf[8:12], totalctr)
 
-		fmt.Println(fmt.Sprintf("write s=%d, ns=%d, no=%d", uint64(delta.Seconds()), uint32(delta.Nanoseconds()), totalctr))
+		//fmt.Println(fmt.Sprintf("write s=%d, ns=%d, no=%d", uint64(delta.Seconds()), uint32(delta.Nanoseconds()), totalctr))
 		_, err := c.Write(buf)
 		if err == nil {
 			totalctr += 1
@@ -147,10 +148,10 @@ func (p Packet) Less(other Packet) bool {
 	return p.no > other.no
 }
 
-func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg sync.WaitGroup) {
+func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg *sync.WaitGroup) {
 	jitterBuffer := make([]Packet, 0, 1024)
 
-	deadline := time.Now().Add(time.Duration(conn.config.Duration) * time.Second)
+	deadline := time.Now().Add(time.Duration(conn.config.Duration+conn.config.StopDelayDuration) * time.Second)
 
 	minN := ^uint32(0)
 	maxN := uint32(0)
@@ -225,7 +226,7 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg sync.
 				rtt4 = time.Duration(999) * time.Second
 			}
 
-			fmt.Println(fmt.Sprintf("read ns=%d, no=%d, rtt=%v, sendTime=%v, now=%v", ns, no, rtt4, sendTime, now))
+			//fmt.Println(fmt.Sprintf("read ns=%d, no=%d, rtt=%v, sendTime=%v, now=%v", ns, no, rtt4, sendTime, now))
 			jitterBuffer = append(jitterBuffer, Packet{
 				no:   no,
 				rtt4: rtt4,

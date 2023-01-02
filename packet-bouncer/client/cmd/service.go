@@ -9,13 +9,14 @@ import (
 )
 
 var (
-	endpoint   string
-	nClients   int
-	pps        int
-	packetSize int
-	duration   int
-	protocol   string
-	engine     *service.Engine
+	endpoint          string
+	nClients          int
+	pps               int
+	packetSize        int
+	duration          int
+	protocol          string
+	engine            *service.Engine
+	stopDelayDuration int
 )
 
 var startCmd = &cobra.Command{
@@ -24,11 +25,12 @@ var startCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 
 		conf := client.ConnConfig{
-			Pps:        pps,
-			Endpoint:   endpoint,
-			Duration:   duration,
-			PacketSize: packetSize,
-			Protocol:   protocol,
+			Pps:               pps,
+			Endpoint:          endpoint,
+			Duration:          duration,
+			PacketSize:        packetSize,
+			Protocol:          protocol,
+			StopDelayDuration: stopDelayDuration,
 		}
 
 		wg := sync.WaitGroup{}
@@ -72,6 +74,7 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&endpoint, "endpoint", "127.0.0.1:8050", "sets endpoint")
 	rootCmd.PersistentFlags().IntVar(&nClients, "clients", 1, "sets no. of clients")
 	rootCmd.PersistentFlags().IntVar(&duration, "duration", 10, "sets duration")
+	rootCmd.PersistentFlags().IntVar(&stopDelayDuration, "--delay-after-stopping-sender", 0, "seconds to wait and receive after stopping sender")
 	rootCmd.PersistentFlags().IntVar(&pps, "pps", 10, "sets packets per seconds for each client")
 	rootCmd.PersistentFlags().IntVar(&packetSize, "packet", 960, "sets packet size for each packet")
 	rootCmd.PersistentFlags().StringVar(&protocol, "protocol", "tcp", "sets protocol")
