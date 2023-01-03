@@ -278,11 +278,13 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg *sync
 	}
 
 	result := Result{
-		Loss:       loss,
-		Badl:       badl,
-		Rtt:        rtt,
-		Score:      score,
-		Throughput: throughput * 8 * 2,
+		Loss:            loss,
+		Badl:            badl,
+		Rtt:             rtt,
+		Score:           score,
+		Throughput:      throughput * 8 * 2,
+		ReceivedPackets: ctr,
+		SentPackets:     conn.config.Pps * conn.config.Duration,
 	}
 	conn.mutex.Lock()
 	*results = append(*results, result)

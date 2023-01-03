@@ -54,7 +54,7 @@ func (e *Engine) Start() error {
 		finalResult.Throughput += result.Throughput
 	}
 
-	finalResult.ReceivedPackets = finalResult.ReceivedPackets / totalThreads
+	//finalResult.ReceivedPackets = finalResult.ReceivedPackets / totalThreads
 	finalResult.Loss = finalResult.Loss / float64(totalThreads)
 	finalResult.Badl = finalResult.Badl / float64(totalThreads)
 	finalResult.Rtt.Rtts0 = finalResult.Rtt.Rtts0 / float64(totalThreads)
@@ -64,7 +64,7 @@ func (e *Engine) Start() error {
 	finalResult.Rtt.Rtts4 = finalResult.Rtt.Rtts4 / float64(totalThreads)
 	finalResult.Rtt.Rtts5 = finalResult.Rtt.Rtts5 / float64(totalThreads)
 	finalResult.Score = finalResult.Score / float64(totalThreads)
-	finalResult.SentPackets = finalResult.SentPackets / totalThreads
+	//finalResult.SentPackets = finalResult.SentPackets / totalThreads
 	//finalResult.Throughput = finalResult.Throughput / float64(totalThreads)
 	b, err := json.Marshal(finalResult)
 	if err != nil {
