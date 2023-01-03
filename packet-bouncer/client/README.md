@@ -32,5 +32,5 @@ then
         wget -O packet-bouncer-client https://github.com/salmanmalik-emb/zta-v2-benchmarking/raw/main/packet-bouncer/client/client
         chmod +x packet-bouncer-client
 fi
-./packet-bouncer-client --endpoint $SERVICE_ENDPOINT --clients $CONN --duration $DURATION --pps $PPS --packet $PACKET_SIZE --delay-after-stopping-sender $DELAY_AFTER_CLOSE
+./packet-bouncer-client service start --endpoint $SERVICE_ENDPOINT --clients $CONN --duration $DURATION --pps $PPS --packet $PACKET_SIZE
 ```
