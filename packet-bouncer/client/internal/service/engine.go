@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"packet-bouncer/client/internal/client"
 	"sync"
+	"time"
 )
 
 type Engine struct {
@@ -36,6 +37,9 @@ func (e *Engine) Start() error {
 		e.wg.Add(1)
 		go e.connWorker(i, &results)
 	}
+	fmt.Println("Test started, start time: ", time.Now().String())
+	approxThroughput := (float64(e.connConfig.Pps*e.nClients*(e.connConfig.PacketSize+40)*2*8) / float64(1024*1024) / 8) * 60
+	fmt.Println("This script will produce approximately: ", approxThroughput, " Mb/Minute of throughput")
 	e.wg.Wait()
 	totalThreads := len(results)
 	finalResult := client.Result{}
@@ -71,7 +75,8 @@ func (e *Engine) Start() error {
 		fmt.Println(err)
 		return err
 	}
-	fmt.Println(string(b))
+	fmt.Println("Test End Time:", time.Now().String(), string(b))
+	fmt.Println("Approx Throughput in MB/minute  (aws format): ", (finalResult.Throughput/8.0)*60)
 	return nil
 }
 
