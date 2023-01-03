@@ -253,6 +253,7 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg *sync
 		analysePacket(&p)
 	}
 	receiveCumulativeTimeDelta := time.Now().Sub(receiveStartTime)
+	//receiveCumulativeTimeDelta -= time.Duration(conn.config.StopDelayDuration)
 	if ctr == 0 {
 		return
 	}
@@ -267,7 +268,9 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg *sync
 	rtts5 := float64(rtt4stats[5]) * 100.0 / nn
 	score := 10.0 - loss/3.0 - badl/1.0 - rtts2/200.0 - rtts3/80.0 - rtts4/40.0 - rtts5/20.0
 	//fmt.Println(receiveCumulativeTimeDelta.Seconds(), " ctr", ctr)
-	throughput := ((float64(ctr) * float64(conn.config.PacketSize)) / receiveCumulativeTimeDelta.Seconds()) / float64(1024*1024)
+	//fmt.Println("ctr: ", ctr, "packetsize", conn.config.PacketSize, "timedelta", receiveCumulativeTimeDelta.Seconds())
+	throughput := ((float64(ctr) * float64(conn.config.PacketSize+40)) / receiveCumulativeTimeDelta.Seconds()) / float64(1024*1024)
+	//fmt.Println(throughput * 60 * 2)
 	rtt := rtt{
 		Rtts0: rtts0,
 		Rtts1: rtts1,
