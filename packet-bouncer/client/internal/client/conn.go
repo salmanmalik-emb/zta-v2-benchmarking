@@ -2,7 +2,6 @@ package client
 
 import (
 	"encoding/binary"
-	"fmt"
 	"net"
 	"os"
 	"sync"
@@ -21,41 +20,43 @@ type ConnConfig struct {
 type clientConn struct {
 	config ConnConfig
 	c      net.Conn
+	mutex  sync.Mutex
 }
 
 type rtt struct {
-	rtts0 float64 `json:"0_49"`
-	rtts1 float64 `json:"50_179"`
-	rtts2 float64 `json:"180_399"`
-	rtts3 float64 `json:"400_999"`
-	rtts4 float64 `json:"1000_1999"`
-	rtts5 float64 `json:"2000+"`
+	Rtts0 float64 `json:"0_49"`
+	Rtts1 float64 `json:"50_179"`
+	Rtts2 float64 `json:"180_399"`
+	Rtts3 float64 `json:"400_999"`
+	Rtts4 float64 `json:"1000_1999"`
+	Rtts5 float64 `json:"2000+"`
 }
 
 type Result struct {
-	receivedPackets int     `json:"received_packets"`
-	minMaxWindow    int     `json:"min_max_window"`
-	sentPackets     int     `json:"sent_packets"`
-	loss            float64 `json:"loss"`
-	badl            float64 `json:"bad_loss"`
-	rtt             rtt
-	score           float64 `json:"score"`
+	ReceivedPackets int     `json:"received_packets"`
+	MinMaxWindow    int     `json:"min_max_window"`
+	SentPackets     int     `json:"sent_packets"`
+	Loss            float64 `json:"loss"`
+	Badl            float64 `json:"bad_loss"`
+	Rtt             rtt
+	Score           float64 `json:"score"`
+	Throughput      float64 `json:"throughput_Mbs"`
 }
 
 func NewConn(config ConnConfig) *clientConn {
 
-	c, err := net.Dial("udp", config.Endpoint)
-	if err != nil {
-		fmt.Println(err)
-		return nil
-	}
+	//c, err := net.Dial("udp", config.Endpoint)
+	//if err != nil {
+	//	fmt.Println(err)
+	//	return nil
+	//}
 	return &clientConn{
 		config: config,
-		c:      c,
+		c:      nil,
 	}
 }
 
-func (conn *clientConn) Start() error {
+func (conn *clientConn) Start(results *[]Result) error {
 
 	var c net.Conn
 	if conn.config.Protocol == "udp" {
@@ -95,7 +96,7 @@ func (conn *clientConn) Start() error {
 
 	wg.Add(2)
 	go conn.sendingThread(c, timeBase, &wg)
-	go conn.receivingThread(c, timeBase, &wg)
+	go conn.receivingThread(c, timeBase, &wg, results)
 
 	wg.Wait()
 	return nil
@@ -135,7 +136,7 @@ func (conn *clientConn) sendingThread(c net.Conn, timeBase time.Time, wg *sync.W
 			totalctr += 1
 		}
 	}
-
+	//fmt.Println("packets sent: ", totalctr)
 	wg.Done()
 }
 
@@ -148,7 +149,7 @@ func (p Packet) Less(other Packet) bool {
 	return p.no > other.no
 }
 
-func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg *sync.WaitGroup) {
+func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg *sync.WaitGroup, results *[]Result) {
 	jitterBuffer := make([]Packet, 0, 1024)
 
 	deadline := time.Now().Add(time.Duration(conn.config.Duration+conn.config.StopDelayDuration) * time.Second)
@@ -201,7 +202,10 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg *sync
 	}
 
 	buf := make([]byte, conn.config.PacketSize)
+	receiveStartTime := time.Now()
+	var no uint32
 	for {
+		c.SetReadDeadline(deadline)
 		_, err := c.Read(buf)
 		now := time.Now()
 		if now.After(deadline) {
@@ -212,7 +216,7 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg *sync
 
 			//s := binary.BigEndian.Uint64(buf[:8])
 			ns := binary.BigEndian.Uint64(buf[0:8])
-			no := binary.BigEndian.Uint32(buf[8:12])
+			no = binary.BigEndian.Uint32(buf[8:12])
 
 			if /*s == 0 &&*/ ns == 0 && no == 0 {
 				continue
@@ -241,13 +245,14 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg *sync
 				// log message
 			}
 		} else {
+			break
 			// ignore error
 		}
 	}
 	for _, p := range jitterBuffer {
 		analysePacket(&p)
 	}
-
+	receiveCumulativeTimeDelta := time.Now().Sub(receiveStartTime)
 	if ctr == 0 {
 		return
 	}
@@ -261,24 +266,30 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg *sync
 	rtts4 := float64(rtt4stats[4]) * 100.0 / nn
 	rtts5 := float64(rtt4stats[5]) * 100.0 / nn
 	score := 10.0 - loss/3.0 - badl/1.0 - rtts2/200.0 - rtts3/80.0 - rtts4/40.0 - rtts5/20.0
-
+	//fmt.Println(receiveCumulativeTimeDelta.Seconds(), " ctr", ctr)
+	throughput := ((float64(ctr) * float64(conn.config.PacketSize)) / receiveCumulativeTimeDelta.Seconds()) / float64(1024*1024)
 	rtt := rtt{
-		rtts0: rtts0,
-		rtts1: rtts1,
-		rtts2: rtts2,
-		rtts3: rtts3,
-		rtts4: rtts4,
-		rtts5: rtts5,
+		Rtts0: rtts0,
+		Rtts1: rtts1,
+		Rtts2: rtts2,
+		Rtts3: rtts3,
+		Rtts4: rtts4,
+		Rtts5: rtts5,
 	}
 
 	result := Result{
-		loss:  loss,
-		badl:  badl,
-		rtt:   rtt,
-		score: score,
+		Loss:       loss,
+		Badl:       badl,
+		Rtt:        rtt,
+		Score:      score,
+		Throughput: throughput * 8 * 2,
 	}
+	conn.mutex.Lock()
+	*results = append(*results, result)
+	conn.mutex.Unlock()
 
-	fmt.Println(fmt.Sprintf("%+v", result))
+	//fmt.Println(fmt.Sprintf("%+v", result))
+	//fmt.Println("Throughput: ", throughput*8*2, " Mb/s")
 
 	wg.Done()
 }
