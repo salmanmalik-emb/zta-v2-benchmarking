@@ -22,8 +22,8 @@ Options:
 SERVICE_ENDPOINT=100.64.0.1:7000
 CONN=20
 DURATION=300
-DELAY_AFTER_CLOSE=120
-PPS=16
+DELAY_AFTER_CLOSE=3
+PPS=100
 PACKET_SIZE=192
 
 
@@ -32,6 +32,5 @@ then
         wget -O packet-bouncer-client https://github.com/salmanmalik-emb/zta-v2-benchmarking/raw/main/packet-bouncer/client/client
         chmod +x packet-bouncer-client
 fi
-./packet-bouncer-client --endpoint $SERVICE_ENDPOINT --clients $CONN --duration $DURATION --pps $PPS --packet $PACKET_SIZE --delay-after-stopping-sender $DELAY_AFTER_CLOSE 2> /dev/null > output.json
-curl -X POST http://turnserver1.extremecloudztna.com:8888/results -H "Content-Type: application/json" -d @./output.json
+./packet-bouncer-client --endpoint $SERVICE_ENDPOINT --clients $CONN --duration $DURATION --pps $PPS --packet $PACKET_SIZE --delay-after-stopping-sender $DELAY_AFTER_CLOSE
 ```
