@@ -33,4 +33,9 @@ then
         chmod +x packet-bouncer-client
 fi
 ./packet-bouncer-client service start --endpoint $SERVICE_ENDPOINT --clients $CONN --duration $DURATION --pps $PPS --packet $PACKET_SIZE
+
+# save json output in file
+./packet-bouncer-client service start --endpoint $SERVICE_ENDPOINT --clients $CONN --duration $DURATION --pps $PPS --packet $PACKET_SIZE 2>&1 | tail -n1 > output.json
+# post json output to server
+curl -X POST http://turnserver1.extremecloudztna.com:8888/results -H "Content-Type: application/json" -d @./output.json
 ```

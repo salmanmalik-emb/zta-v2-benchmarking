@@ -75,8 +75,9 @@ func (e *Engine) Start() error {
 		fmt.Println(err)
 		return err
 	}
-	fmt.Println("Test End Time:", time.Now().String(), string(b))
+	fmt.Println("Test End Time:", time.Now().String())
 	fmt.Println("Approx Throughput in MB/minute  (aws format): ", (finalResult.Throughput/8.0)*60)
+	fmt.Println(string(b))
 	return nil
 }
 
