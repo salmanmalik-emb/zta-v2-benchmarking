@@ -38,7 +38,7 @@ type Result struct {
 	SentPackets     int     `json:"sent_packets"`
 	Loss            float64 `json:"loss"`
 	Badl            float64 `json:"bad_loss"`
-	Rtt             rtt
+	Rtt             rtt     `json:"rtt"`
 	Score           float64 `json:"score"`
 	Throughput      float64 `json:"throughput_Mbs"`
 }
