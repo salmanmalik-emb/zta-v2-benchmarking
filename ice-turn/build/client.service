@@ -6,7 +6,7 @@ WantedBy=multi-user.target
 [Service]
 Type=simple
 ExecStart=/usr/local/bin/ice-turn-client service start --log-proxy-throughput 1 --log-throughput-endpoint http://13.250.182.148:8888/hop-results
-ExecStop=/usr/local/bin/ice-turn-client service stop
+ExecStop=/usr/local/bin/ice-turn-client a stop
 WorkingDirectory=/usr/local/bin
 Restart=on-failure
 RestartSec=5
