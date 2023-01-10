@@ -71,12 +71,12 @@ var stopCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringVar(&endpoint, "endpoint", "127.0.0.1:8050", "sets endpoint")
+	rootCmd.PersistentFlags().StringVar(&endpoint, "endpoint", "100.64.0.1:7000", "sets endpoint")
 	rootCmd.PersistentFlags().IntVar(&nClients, "clients", 1, "sets no. of clients")
 	rootCmd.PersistentFlags().IntVar(&duration, "duration", 10, "sets duration")
 	rootCmd.PersistentFlags().IntVar(&stopDelayDuration, "delay-after-stopping-sender", 30, "seconds to wait and receive after stopping sender")
-	rootCmd.PersistentFlags().IntVar(&pps, "pps", 100, "sets packets per seconds for each client")
-	rootCmd.PersistentFlags().IntVar(&packetSize, "packet", 1500, "sets packet size for each packet")
+	rootCmd.PersistentFlags().IntVar(&pps, "pps", 10, "sets packets per seconds for each client")
+	rootCmd.PersistentFlags().IntVar(&packetSize, "packet", 100, "sets packet size for each packet")
 	rootCmd.PersistentFlags().StringVar(&protocol, "protocol", "tcp", "sets protocol")
 }
 
