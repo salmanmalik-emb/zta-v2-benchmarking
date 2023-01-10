@@ -43,7 +43,7 @@ func handleConnection(conn net.Conn) {
 		}
 		fmt.Println("Message Received len: ", noBytes)
 		// Send message back to client
-		_, err = conn.Write(readBytes)
+		_, err = conn.Write(readBytes[:noBytes])
 		if err != nil {
 			fmt.Println(err.Error())
 		}
