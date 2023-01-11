@@ -1,0 +1,25 @@
+{
+    "results": [
+    {
+    "bytes_out": 950498536,
+    "packets_out": 901060,
+    "bytes_in": 950382920,
+    "packets_in": 900172,
+    "id": "I8rF+bv6ryDCWJlPQjWF2v+LiMTJgE9yWdNboxl4NBw="
+    },
+    {
+    "bytes_out": 950393480,
+    "packets_out": 900182,
+    "bytes_in": 950498536,
+    "packets_in": 901060,
+    "id": "8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg="
+    }
+    ],
+    "total": {
+    "bytes_out": 1900892016,
+    "packets_out": 1801242,
+    "bytes_in": 1900881456,
+    "packets_in": 1801232,
+    "id": ""
+    }
+}

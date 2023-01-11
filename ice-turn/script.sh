@@ -63,7 +63,7 @@ sleep 60s
 echo "running load client script"
 ./packet-bouncer-client service start --endpoint $SERVICE_ENDPOINT --clients $CONN --duration $DURATION --pps $PPS --packet $PACKET_SIZE --delay-after-stopping-sender $DELAY_AFTER_CLOSE 2>&1 | tail -n1 > output.json
 cat output.json
-curl -X POST http://18.140.116.145:8888/results -H "Content-Type: application/json" -d @./output.json
+curl -X POST http://18.142.95.100:8888/results -H "Content-Type: application/json" -d @./output.json
 
 systemctl stop ice-turn-client.service
 sudo systemctl disable ice-turn-client
