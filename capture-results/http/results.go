@@ -51,6 +51,10 @@ func (h *ResultHandler) SaveResult(c *gin.Context) {
 func (h *ResultHandler) GetResults(c *gin.Context) {
 	total := Result{}
 	titem := len(h.results)
+	if titem == 0 {
+		c.JSON(http.StatusOK, gin.H{"results": h.results, "total": total})
+		return
+	}
 	for _, result := range h.results {
 		total.ReceivedPackets += result.ReceivedPackets
 		total.MinMaxWindow += result.MinMaxWindow

@@ -71,7 +71,7 @@ var stopCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringVar(&endpoint, "endpoint", "100.64.0.1:7000", "sets endpoint")
+	rootCmd.PersistentFlags().StringVar(&endpoint, "endpoint", "localhost:8050", "sets endpoint")
 	rootCmd.PersistentFlags().IntVar(&nClients, "clients", 1, "sets no. of clients")
 	rootCmd.PersistentFlags().IntVar(&duration, "duration", 10, "sets duration")
 	rootCmd.PersistentFlags().IntVar(&stopDelayDuration, "delay-after-stopping-sender", 30, "seconds to wait and receive after stopping sender")
