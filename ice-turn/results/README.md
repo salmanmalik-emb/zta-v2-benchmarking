@@ -22,7 +22,7 @@
             <table>
                  <tr><th> Relay </th><th> Connector </th><th> User/threads </th><th> Packet Size </th><th> PPS </th><th> Score </th> </tr>
                 <tbody>
-                    <tr><td> Throughput: 636 Mbps <br /> CPU: 83% </td><td> Throughput: 609.33 Mbps <br /> CPU: 93% </td><td> 250 (threads: 1) </td><td> 960 Bytes  </td><td> 90 </td><td> 9.45</td></tr>
+                    <tr><td> Throughput: 636 Mbps <br /> CPU: 83% </td><td> Throughput: 609.33 Mbps <br /> CPU: 93% </td><td> 250 (threads: 1) </td><td> 960 Bytes  </td><td> 90 </td><td> 8.02</td></tr>
                     <tr><td> Throughput: 288 Mbps <br /> CPU: 60.5% </td><td> Throughput: 272 Mbps <br /> CPU: 78% </td><td> 800 (threads: 1) </td><td> 192 Bytes  </td><td> 16 </td><td> 9.31</td></tr>
                 </tbody>
             </table>
@@ -34,9 +34,9 @@
 </table>
 
 
-## CPU vs Throughput vs Connections
+## CPU vs Throughput
 
-![](Connections-Throughput-CPU.png)
+![](cpu-vs-throughput.png)
 
 
 
