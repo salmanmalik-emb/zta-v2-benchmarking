@@ -48,7 +48,7 @@ CONN=10
 DURATION=60
 DELAY_AFTER_CLOSE=60
 PPS=90
-PACKET_SIZE=880
+PACKET_SIZE=960
 
 
 if [ ! -f ./packet-bouncer-client ]
