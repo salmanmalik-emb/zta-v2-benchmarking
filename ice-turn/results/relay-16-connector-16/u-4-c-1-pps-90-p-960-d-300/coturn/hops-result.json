@@ -1,0 +1,67 @@
+{
+    "results": [
+    {
+    "bytes_out": 28520920,
+    "packets_out": 27096,
+    "bytes_in": 28511964,
+    "packets_in": 27031,
+    "id": "xZfKxUnuu9k0p4x5Qf4IQIzSBzrX0f445r17WudzRRY="
+    },
+    {
+    "bytes_out": 28565940,
+    "packets_out": 27565,
+    "bytes_in": 28513440,
+    "packets_in": 27029,
+    "id": "W/i4BbzVxV3pPgw9dp1aSzuzKvyKz7LEXWECgeqXgXs="
+    },
+    {
+    "bytes_out": 28532536,
+    "packets_out": 27217,
+    "bytes_in": 28513444,
+    "packets_in": 27029,
+    "id": "cWcLEn44nGK8h33GvLXEXOVrvZccKMnABX8xtqhIXkg="
+    },
+    {
+    "bytes_out": 28518880,
+    "packets_out": 27074,
+    "bytes_in": 28513560,
+    "packets_in": 27026,
+    "id": "dydPqoxPGdJyMSemQQv6QdmveJa+rt+15uo0HwwJsiw="
+    },
+    {
+    "bytes_out": 28512444,
+    "packets_out": 27036,
+    "bytes_in": 28520920,
+    "packets_in": 27096,
+    "id": "8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg="
+    },
+    {
+    "bytes_out": 28514976,
+    "packets_out": 27035,
+    "bytes_in": 28565940,
+    "packets_in": 27565,
+    "id": "8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg="
+    },
+    {
+    "bytes_out": 28514980,
+    "packets_out": 27035,
+    "bytes_in": 28532536,
+    "packets_in": 27217,
+    "id": "8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg="
+    },
+    {
+    "bytes_out": 28514040,
+    "packets_out": 27031,
+    "bytes_in": 28518880,
+    "packets_in": 27074,
+    "id": "8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg="
+    }
+    ],
+    "total": {
+    "bytes_out": 228194716,
+    "packets_out": 217089,
+    "bytes_in": 228190684,
+    "packets_in": 217067,
+    "id": ""
+    }
+    }
