@@ -70,4 +70,4 @@ rm /etc/ztna/ipsec-client.json
 rm ./packet-bouncer-client
 
 apt-get remove strongswan libcharon-extra-plugins strongswan-pki -y
-apt remove strongswan-swanctl
+apt remove strongswan-swanctl -y
