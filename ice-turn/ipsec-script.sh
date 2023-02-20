@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo dpkg --configure -a
 apt-get update
 apt-get install strongswan libcharon-extra-plugins strongswan-pki -y
 apt install strongswan-swanctl -y
@@ -41,9 +42,9 @@ done
 
 #SERVICE_ENDPOINT=18.189.156.25:8050
 SERVICE_ENDPOINT=100.64.0.1:7000
-CONN=10
-DURATION=60
-DELAY_AFTER_CLOSE=60
+CONN=1
+DURATION=300
+DELAY_AFTER_CLOSE=120
 PPS=90
 PACKET_SIZE=960
 
