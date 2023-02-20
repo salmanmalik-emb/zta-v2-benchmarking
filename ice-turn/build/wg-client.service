@@ -5,7 +5,7 @@ Description=ICE TURN Client to connect with ICE TURN Connector
 WantedBy=multi-user.target
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/ice-turn-client service start --tunnel wireguard --config /etc/ztna/wg-client.json --log-proxy-throughput 1 --log-throughput-endpoint http://13.229.240.224:8888/hop-results
+ExecStart=/usr/local/bin/ice-turn-client service start --tunnel wireguard --config /etc/ztna/wg-client.json --log-proxy-throughput 1 --log-throughput-endpoint http://54.255.90.188:8888/hop-results
 ExecStop=/usr/local/bin/ice-turn-client a stop
 WorkingDirectory=/usr/local/bin
 Restart=on-failure
