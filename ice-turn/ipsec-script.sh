@@ -14,7 +14,7 @@ then
         mkdir /etc/ztna
         touch ipsec-client.json
 fi
-echo '{"wg_private_key":"","pre_shared_key":"eNZoTDmGwCDXb1FwIF6ZF1c/AEUcIDVC","local_addr":"","local_iface":"eth0","local_port":"4500","tunnel_config":{"stuns":[{"uri":"stun:turnserver1.extremecloudztna.com:3479"}],"turns":[{"hostConfig":{"uri":"turn:turnserver1.extremecloudztna.como:3479"},"user":"salman1","password":"123"}],"signal_service":{"uri":"turnserver1.extremecloudztna.com:443","protocol":"https"}},"peers":[{"public_key":"8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg=","allowed_ips":["100.64.0.1/32"]}]}' > /etc/ztna/ipsec-client.json
+echo '{"pre_shared_key":"eNZoTDmGwCDXb1FwIF6ZF1c/AEUcIDVC","local_addr":"","local_iface":"eth0","local_port":"4500","tunnel_config":{"stuns":[{"uri":"stun:turnserver1.extremecloudztna.com:3479"}],"turns":[{"hostConfig":{"uri":"turn:turnserver1.extremecloudztna.como:3479"},"user":"salman1","password":"123"}],"ac_service":{"uri":"turnserver1.extremecloudztna.com:6000","protocol":"ws"}},"peers":[{"id":"my-connector","public_key":"8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg=","allowed_ips":["100.64.0.1/32"]}]}' > /etc/ztna/ipsec-client.json
 
 if [ ! -f /etc/systemd/system/ice-turn-client.service ]
 then
