@@ -16,7 +16,7 @@ then
         mkdir /etc/ztna
         touch wg-client.json
 fi
-echo '{"wg_private_key":"","pre_shared_key":"","wg_iface_name":"utun151","wg_port":51821,"wg_mtu":1420,"wg_addr":"","tunnel_config":{"stuns":[{"uri":"stun:turnserver1.extremecloudztna.com:3479"}],"turns":[{"hostConfig":{"uri":"turn:turnserver1.extremecloudztna.com:3479"},"user":"salman1","password":"123"}],"signal_service":{"uri":"turnserver1.extremecloudztna.com:443","protocol":"https"}},"peers":[{"public_key":"8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg=","allowed_ips":["100.64.0.1/32"]}]}' > /etc/ztna/wg-client.json
+echo '{"wg_private_key":"","pre_shared_key":"","wg_iface_name":"utun151","wg_port":51821,"wg_mtu":1420,"wg_addr":"","tunnel_config":{"stuns":[{"uri":"stun:turnserver1.extremecloudztna.com:3479"}],"turns":[{"hostConfig":{"uri":"turn:turnserver1.extremecloudztna.com:3479"},"user":"salman1","password":"123"}],"ac_service":{"uri":"turnserver1.extremecloudztna.com:6000","protocol":"ws"}},"peers":[{"id":"my-connector","public_key":"8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg=","allowed_ips":["100.64.0.1/32"]}]}' > /etc/ztna/wg-client.json
 
 if [ ! -f /etc/systemd/system/ice-turn-client.service ]
 then
