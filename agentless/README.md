@@ -1,7 +1,7 @@
 
 ### Specs / Results
 <table>
-   <th>  No. </th><th> Relay CPU </th><th> Connector CPU </th><th> Summary </th><th> Results</th>
+   <th>  No. </th><th> Relay CPU </th><th> Connector CPU </th><th> Summary </th>
    <tbody>
       <tr>
        <tr><td>1. </td><td> 2 </td><td> 4 </td>
