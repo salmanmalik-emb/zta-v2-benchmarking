@@ -56,6 +56,7 @@ func (e *Engine) Start() error {
 		finalResult.Score += result.Score
 		finalResult.SentPackets += result.SentPackets
 		finalResult.Throughput += result.Throughput
+		finalResult.Status += result.Status + "\n"
 	}
 
 	//finalResult.ReceivedPackets = finalResult.ReceivedPackets / totalThreads
