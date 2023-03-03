@@ -2,8 +2,11 @@ package client
 
 import (
 	"encoding/binary"
+	"io/ioutil"
 	"net"
+	"net/http"
 	"os"
+	"strings"
 	"sync"
 	"time"
 )
@@ -41,6 +44,7 @@ type Result struct {
 	Rtt             rtt     `json:"rtt4"`
 	Score           float64 `json:"score"`
 	Throughput      float64 `json:"throughput_Mbs"`
+	Status          string  `json:"status"`
 }
 
 func NewConn(config ConnConfig) *clientConn {
@@ -95,14 +99,14 @@ func (conn *clientConn) Start(results *[]Result) error {
 	wg := sync.WaitGroup{}
 
 	wg.Add(2)
-	go conn.sendingThread(c, timeBase, &wg)
+	go conn.sendingThread(c, timeBase, &wg, results)
 	go conn.receivingThread(c, timeBase, &wg, results)
 
 	wg.Wait()
 	return nil
 }
 
-func (conn *clientConn) sendingThread(c net.Conn, timeBase time.Time, wg *sync.WaitGroup) {
+func (conn *clientConn) sendingThread(c net.Conn, timeBase time.Time, wg *sync.WaitGroup, results *[]Result) {
 	time.Sleep(500 * time.Millisecond) // to allow receiver to warm up
 	start := time.Now()
 	step := time.Second / time.Duration(conn.config.Pps)
@@ -134,6 +138,17 @@ func (conn *clientConn) sendingThread(c net.Conn, timeBase time.Time, wg *sync.W
 		_, err := c.Write(buf)
 		if err == nil {
 			totalctr += 1
+		} else {
+			if strings.Contains(err.Error(), "broken pipe") {
+				p, _ := getPublicIP()
+				result := Result{
+					Status: err.Error() + p,
+				}
+				conn.mutex.Lock()
+				*results = append(*results, result)
+				conn.mutex.Unlock()
+				break
+			}
 		}
 	}
 	//fmt.Println("packets sent: ", totalctr)
@@ -297,4 +312,17 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg *sync
 	//fmt.Println("Throughput: ", throughput*8*2, " Mb/s")
 
 	wg.Done()
+}
+
+func getPublicIP() (string, error) {
+	resp, err := http.Get("https://ifconfig.me")
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+	return string(body), nil
 }
