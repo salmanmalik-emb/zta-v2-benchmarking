@@ -1,0 +1,95 @@
+{
+    "results": [
+    {
+    "bytes_out": 720,
+    "packets_out": 6,
+    "bytes_in": 720,
+    "packets_in": 6,
+    "id": "qZeEPxNmjhQDswLg4malqIwtdEhof8MIByHYwVC2omA="
+    },
+    {
+    "bytes_out": 868,
+    "packets_out": 7,
+    "bytes_in": 720,
+    "packets_in": 6,
+    "id": "8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg="
+    },
+    {
+    "bytes_out": 29379056,
+    "packets_out": 27033,
+    "bytes_in": 29376404,
+    "packets_in": 27032,
+    "id": "jienHZ23lMVkIGjZMl8ZxXW9h6u0PdS0m/cvSDqkilw="
+    },
+    {
+    "bytes_out": 29380976,
+    "packets_out": 27053,
+    "bytes_in": 29376992,
+    "packets_in": 27031,
+    "id": "VI6A9v5TuwBYoxtsBTEwPnxjQQQHbuu+IdLxR1UsADU="
+    },
+    {
+    "bytes_out": 29376992,
+    "packets_out": 27031,
+    "bytes_in": 29380976,
+    "packets_in": 27053,
+    "id": "8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg="
+    },
+    {
+    "bytes_out": 29376404,
+    "packets_out": 27032,
+    "bytes_in": 29379056,
+    "packets_in": 27033,
+    "id": "8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg="
+    },
+    {
+    "bytes_out": 29379052,
+    "packets_out": 27033,
+    "bytes_in": 29375808,
+    "packets_in": 27033,
+    "id": "6+FfSDvTMr6qFOrXxfKc32adDbTHdU4jLar69dE0tns="
+    },
+    {
+    "bytes_out": 29489060,
+    "packets_out": 28179,
+    "bytes_in": 29376312,
+    "packets_in": 27031,
+    "id": "wDEVZaHpuzBGh451k6KF1i68B5nZLlzBQut1aa6pzVo="
+    },
+    {
+    "bytes_out": 29387108,
+    "packets_out": 27117,
+    "bytes_in": 29377584,
+    "packets_in": 27030,
+    "id": "IGZWrUo43vNfIG2VZRmkai3n4FZ3ds6N4TlMISILhGY="
+    },
+    {
+    "bytes_out": 29376288,
+    "packets_out": 27038,
+    "bytes_in": 29379052,
+    "packets_in": 27033,
+    "id": "8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg="
+    },
+    {
+    "bytes_out": 29378064,
+    "packets_out": 27035,
+    "bytes_in": 29387108,
+    "packets_in": 27117,
+    "id": "8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg="
+    },
+    {
+    "bytes_out": 29376792,
+    "packets_out": 27036,
+    "bytes_in": 29489060,
+    "packets_in": 28179,
+    "id": "8/0GtB5f2ahSBG56EFa3rGSGXwvib+IDrp4UQqNZrQg="
+    }
+    ],
+    "total": {
+    "bytes_out": 293901380,
+    "packets_out": 271600,
+    "bytes_in": 293899792,
+    "packets_in": 271584,
+    "id": ""
+    }
+}

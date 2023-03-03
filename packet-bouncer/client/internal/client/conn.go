@@ -38,7 +38,7 @@ type Result struct {
 	SentPackets     int     `json:"sent_packets"`
 	Loss            float64 `json:"loss"`
 	Badl            float64 `json:"bad_loss"`
-	Rtt             rtt
+	Rtt             rtt     `json:"rtt4"`
 	Score           float64 `json:"score"`
 	Throughput      float64 `json:"throughput_Mbs"`
 }
@@ -111,9 +111,9 @@ func (conn *clientConn) sendingThread(c net.Conn, timeBase time.Time, wg *sync.W
 	buf := make([]byte, conn.config.PacketSize)
 
 	var totalctr uint32
-	totalctr = 0
+	totalctr = 1
 
-	for i := 0; i < n; i++ {
+	for i := 1; i <= n; i++ {
 		deadline := start.Add(step * time.Duration(i))
 		now := time.Now()
 
@@ -218,7 +218,7 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg *sync
 			ns := binary.BigEndian.Uint64(buf[0:8])
 			no = binary.BigEndian.Uint32(buf[8:12])
 
-			if /*s == 0 &&*/ ns == 0 && no == 0 {
+			if /*s == 0 &&*/ ns == 0 || no == 0 {
 				continue
 			}
 			sinceBase := time.Duration(ns) * time.Nanosecond

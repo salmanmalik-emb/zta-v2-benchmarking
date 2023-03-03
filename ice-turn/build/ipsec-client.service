@@ -1,0 +1,15 @@
+[Unit]
+After=network.target
+Description=ICE TURN Client to connect with ICE TURN Connector
+[Install]
+WantedBy=multi-user.target
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/ice-turn-client service start --tunnel ipsec --config /etc/ztna/ipsec-client.json --log-proxy-throughput 1 --log-throughput-endpoint http://52.221.203.127:8888/hop-results
+ExecStop=/usr/local/bin/ice-turn-client service stop
+WorkingDirectory=/usr/local/bin
+Restart=on-failure
+RestartSec=5
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=%n% 
