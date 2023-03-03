@@ -2,6 +2,7 @@ package client
 
 import (
 	"encoding/binary"
+	"fmt"
 	"io/ioutil"
 	"net"
 	"net/http"
@@ -142,7 +143,7 @@ func (conn *clientConn) sendingThread(c net.Conn, timeBase time.Time, wg *sync.W
 			if strings.Contains(err.Error(), "broken pipe") {
 				p, _ := getPublicIP()
 				result := Result{
-					Status: err.Error() + p,
+					Status: fmt.Sprintf("Error: %s, Public IP: %s", err.Error(), p),
 				}
 				conn.mutex.Lock()
 				*results = append(*results, result)
@@ -295,7 +296,9 @@ func (conn *clientConn) receivingThread(c net.Conn, timeBase time.Time, wg *sync
 		Rtts5: rtts5,
 	}
 
+	p, _ := getPublicIP()
 	result := Result{
+		Status:          fmt.Sprintf("Completed, Public IP: %s", p),
 		Loss:            loss,
 		Badl:            badl,
 		Rtt:             rtt,
